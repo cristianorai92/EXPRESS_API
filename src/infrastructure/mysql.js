@@ -1,5 +1,5 @@
+import { database } from '../config/env.js';
 import mysql from 'mysql2/promise'
-import { database } from '../config/env';
 
 const pool = mysql.createPool({
     ...database,
@@ -8,3 +8,13 @@ const pool = mysql.createPool({
     decimalNumbers: true
 });
 
+async function verificarConexao() {
+    const connection = await pool.getConnection();
+    try {
+        await connection.query('SELECT 1');
+    } finally {
+        connection.release();
+    }
+}
+
+export { pool, verificarConexao }
