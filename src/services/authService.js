@@ -1,9 +1,9 @@
-import { validarCadastro, validarEndereco } from "../validators/authValidator";
-import { users } from "../repositories";
-import { AppError } from "../shared/error";
+import { validarCadastro, validarEndereco } from "../validators/authValidator.js";
+import { jwtExpireIn, jwtSecret } from "../config/env.js";
+import { users } from "../repositories/index.js";
+import { AppError } from "../shared/errors.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { jwtExpireIn, jwtSecret } from "../config/env";
 
 function usuarioPublico(user) {
     const { passwordHash, ...safeUser } = user;
